@@ -1,6 +1,6 @@
 ROW_MIN =1 # shouldent be 0 otherwise the lgs might be impossible to solve or to easy to solve
-ROW_MAX=10
-ROW_MAX_SCALE = 4
+ROW_MAX=6
+ROW_MAX_SCALE = 3
 OB_ITER = 3 # defines the amount of operations that are done to obfusecate the step form (?)
 import random
 class lgs3:
