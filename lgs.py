@@ -23,13 +23,16 @@ def solve_row(row,sa):
 def add_rows(row1,row2):
 	return [row1[i]+row2[i] for i in range(4)]
 def substract_rows(row1,row2):
-	return [row1[i]-row2[i] for i in range(4)]
+	#print( [row1[i]-row2[i] for i in range(4)])
+	return  [row1[i]-row2[i] for i in range(4)]
+
 
 def scale_row(row,f):
 	return [row[i]*f for i in range(4)]
 
 def change_rows(rows):
-	return random.shuffle(rows)
+	random.shuffle(rows)
+	return rows
 def create_row(filled):
 	#filled give information how many 0 are in a row
 	# filled =0 means the row is full (no 0)
@@ -44,40 +47,42 @@ def create_row(filled):
 def minimize(row):
 	#to avoid getting to big numbers here a semi random approach to get the numbers small again
 	x,y,z,j =row
-	print(x,y,z,j)		
+	#print(x,y,z,j)		
 	# division results are always floats in python. If you int a float you will just cut off the anything behind the ,. therefor 
 	# int(6/4)==1 and int(6/4)!= 6/4 but if int(6/3) == 6/3 then the result of the division is in N
 	for i in range(2,11):
 		if int(x/i) == x/i:
 			if int(y/i) == y/i:
 				if int(z/i) == z/i:
-					return [x/i,y/i,z/i,0]
+					return [int(x/i),int(y/i),int(z/i),0]
 	return row
 
 
 def add_scaled(row1,row2):
 	return add_rows(row1,scale_row(row2,random.randint(2,ROW_MAX_SCALE)))
 def obfusecate(rows):
+	#print(rows)
+	#print("SSSSSSSSSSSSSSSSSS")
 	rows[2] = add_scaled(rows[2],rows[0])
 	rows[1] = add_scaled(rows[2],rows[0])
 	for i in range(OB_ITER):
-		r =randint(0,4)
+		r =random.randint(0,4)
+
 		if r ==0:
-			ro = random.randint(0,3)
-			rows[ro] = scale_row(rows[ro],random.randint(ROW_MAX_SCALE))
+			ro = random.randint(0,2)
+			rows[ro] = scale_row(rows[ro],random.randint(1,ROW_MAX_SCALE))
 		elif r==1:
-			ro1 = random.randint(0,3)
-			ro2 = random.randint(0,3)
+			ro1 = random.randint(0,2)
+			ro2 = random.randint(0,2)
 			rows[ro1] =add_rows(rows[ro1],rows[ro2])
 		elif r==2:
-			ro1 = random.randint(0,3)
-			ro2 = random.randint(0,3)
+			ro1 = random.randint(0,2)
+			ro2 = random.randint(0,2)
 			rows[ro1] =substract_rows(rows[ro1],rows[ro2])			
 		elif r==3:
 			rows = change_rows(rows)
-
 		elif r==4:
-			ro = random.randint(0,3)
+			ro = random.randint(0,2)
 			rows[ro] = minimize(rows[ro])	
 
 	return rows
