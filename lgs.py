@@ -28,6 +28,7 @@ def create_row(filled):
 	rowT = [random.randint(ROW_MIN,ROW_MAX) for i in range(3)]
 	for i in range(filled):
 		rowT[i]=0
+	rowT.append(0)
 	return rowT
 
 	
