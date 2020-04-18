@@ -64,7 +64,7 @@ def obfusecate(rows):
 	#print(rows)
 	#print("SSSSSSSSSSSSSSSSSS")
 	rows[2] = add_scaled(rows[2],rows[0])
-	rows[1] = add_scaled(rows[2],rows[0])
+	rows[1] = add_scaled(rows[1],rows[0])
 	for i in range(OB_ITER):
 		r =random.randint(0,4)
 
